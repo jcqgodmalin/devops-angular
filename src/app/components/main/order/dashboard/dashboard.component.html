@@ -1,0 +1,19 @@
+<p>dashboard works!</p>
+<table>
+    <thead>
+        <tr>
+            <td>Order Name</td>
+            <td>Price</td>
+            <td>Discounted?</td>
+            <td>Actions</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let order of orders">
+            <td>order?.orderName</td>
+            <td>order?.price</td>
+            <td>order?.isDiscounted</td>
+            <td><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
+        </tr>
+    </tbody>
+</table>
