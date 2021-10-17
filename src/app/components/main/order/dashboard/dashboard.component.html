@@ -1,6 +1,39 @@
-<p>dashboard works!</p>
-<table>
+<!-- add order -->
+<form [formGroup]="addOrderForm">
+    <table class="table table-stripped">
+        <thead>
+            <td>Order Name</td>
+            <td>Price</td>
+            <td>Add Discount</td>
+            <td>Action</td>
+        </thead>
+        <tbody>
+            <tr>
+                
+                <td>
+                    <input type="text" name="" id="" formControlName="orderName">
+                </td>
+                <td>
+                    <input type="text" name="" id="" formControlName="price">
+                </td>
+                <td>
+                    <input type="checkbox" name="" id="" formControlName="isDiscounted">
+                </td>
+                <td>
+                    <button (click)="placeOrder()">Place Order</button>
+                </td>
+                    
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<!-- Orders table -->
+<table class="table table-stripped">
     <thead>
+        <tr>
+            <p>Attending Clerk : Jane Doe</p>
+        </tr>
         <tr>
             <td>Order Name</td>
             <td>Price</td>
@@ -10,9 +43,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let order of orders">
-            <td>order?.orderName</td>
-            <td>order?.price</td>
-            <td>order?.isDiscounted</td>
+            <td>{{ order?.orderName }}</td>
+            <td>{{ order?.price }}</td>
+            <td><input type="checkbox" [checked]="order.discounted" disabled></td>
             <td><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
         </tr>
     </tbody>

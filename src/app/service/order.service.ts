@@ -15,11 +15,8 @@ export class OrderService {
 
   constructor(private backendService : BackendService) { }
 
-  public getAllOrders() : Order[] {
-    this.backendService.getAllOrders().subscribe(data => {
-      this.orders = data;
-    });
-    return this.orders;
+  public getAllOrders() : Observable<Order[]> {
+    return this.backendService.getAllOrders();
   }
 
   public addOrder(order : Order) {
