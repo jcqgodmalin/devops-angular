@@ -2,10 +2,12 @@
 <form [formGroup]="addOrderForm">
     <table class="table table-stripped">
         <thead>
-            <td>Order Name</td>
-            <td>Price</td>
-            <td>Add Discount</td>
-            <td>Action</td>
+            <tr style="font-weight: bold;">
+                <td>Order Name</td>
+                <td>Price</td>
+                <td>Discount</td>
+                <td>Action</td>
+            </tr>
         </thead>
         <tbody>
             <tr>
@@ -14,27 +16,31 @@
                     <input type="text" name="" id="" formControlName="orderName">
                 </td>
                 <td>
-                    <input type="text" name="" id="" formControlName="price">
+                    <input type="number" name="" id="" formControlName="price">
                 </td>
                 <td>
-                    <input type="checkbox" name="" id="" formControlName="isDiscounted">
+                    <input type="checkbox" name="isDiscounted" id="isDiscounted" formControlName="isDiscounted"> Add 5% Discount
                 </td>
                 <td>
-                    <button (click)="placeOrder()">Place Order</button>
+                    <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
                 </td>
                     
             </tr>
         </tbody>
     </table>
+    <div class="alert alert-danger" *ngIf="addOrderError"  style="text-align: center;"><i class="fas fa-exclamation-triangle"></i> Order Name and Price are required.</div>
 </form>
+<br>
+<br>
 
 <!-- Orders table -->
-<table class="table table-stripped">
+<form [formGroup]="updateOrderForm">
+<table class="table table-striped" style="text-align: center;">
     <thead>
-        <tr>
-            <p>Attending Clerk : Jane Doe</p>
+        <tr style="text-align: center;">
+            <td colspan="4">Attending Clerk : Jane Doe</td>
         </tr>
-        <tr>
+        <tr style="font-weight: bold;">
             <td>Order Name</td>
             <td>Price</td>
             <td>Discounted?</td>
@@ -43,10 +49,28 @@
     </thead>
     <tbody>
         <tr *ngFor="let order of orders">
-            <td>{{ order?.orderName }}</td>
-            <td>{{ order?.price }}</td>
+            <td class="order-name">{{ order?.orderName }}</td>
+            <td>₱ {{ order?.price }}</td>
             <td><input type="checkbox" [checked]="order.discounted" disabled></td>
-            <td><a href="#">Edit</a>&nbsp;<a href="#">Delete</a></td>
+            <td>
+                <button class="btn btn-primary" (click)="onClickUpdate(order)"><i class="fas fa-edit"></i> Edit</button> &nbsp; <button class="btn btn-danger" (click)="deleteOrder(order.id)"><i class="fas fa-trash-alt"></i> Delete</button></td>
+        </tr>
+        <tr *ngIf="forUpdate">
+            <td><input type="text" formControlName="orderName"></td>
+            <td><input type="number" formControlName="price"></td>
+            <td><input type="checkbox" formControlName="isDiscounted"></td>
+            <td><button class="btn btn-primary" (click)="updateOrder()">Save</button>&nbsp;<button class="btn btn-secondary" (click)="clearUpdateForm()">Cancel</button></td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="4">Total Regular Bill : ₱ {{ totalRegularBill }}</td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="4">Total Discounted Bill : ₱ {{ totalDiscountedBill }}</td>
         </tr>
     </tbody>
 </table>
+<div class="alert alert-danger" *ngIf="updateOrderError" style="text-align: center;">
+    <span><i class="fas fa-exclamation-triangle"></i> Order Name and Price are required.</span>
+</div>
+
+</form>

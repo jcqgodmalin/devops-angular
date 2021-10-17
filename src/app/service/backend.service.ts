@@ -11,8 +11,10 @@ export class BackendService {
 
   constructor(private httpClient : HttpClient) { }
 
-  apiUrl : String = "http://localhost:9090/KopeeteariaAPI/api";
-  apiEndpoint : String = `${this.apiUrl}/orders`;
+  /**
+   * 
+   * ORDERS
+   */
 
   /*
   
@@ -57,5 +59,7 @@ export class BackendService {
     return this.httpClient.delete<void>(`${environment.api_url}/${id}`);
 
   }
+
+
 
 }
