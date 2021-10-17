@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:9090/KopeeteariaAPI/api/orders',
+  logo_image_url: '../../../../assets/images/header-img.png',
+  menu_image_url: '../../../../../assets/images/menu.png'
 };
 
 /*
