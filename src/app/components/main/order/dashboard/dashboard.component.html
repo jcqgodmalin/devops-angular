@@ -63,12 +63,12 @@
                 </span>
             </td>
             <td>
-                <button class="btn btn-primary" (click)="onClickUpdate(order)"><i class="fas fa-edit"></i> Edit</button> &nbsp; <button class="btn btn-danger" (click)="deleteOrder(order.id)"><i class="fas fa-trash-alt"></i> Delete</button>
+                <button class="btn btn-primary" id="editOrderButton" (click)="onClickUpdate(order)"><i class="fas fa-edit"></i> Edit</button> &nbsp; <button class="btn btn-danger" id="deleteOrderButton" (click)="deleteOrder(order.id)"><i class="fas fa-trash-alt"></i> Delete</button>
             </td>
         </tr>
         <tr *ngIf="forUpdate">
-            <td><input type="text" class="form-control" formControlName="orderName"></td>
-            <td><input type="number" class="form-control" min="0" formControlName="price"></td>
+            <td><input type="text" id="updateOrderName" class="form-control" formControlName="orderName"></td>
+            <td><input type="number" id="updateOrderPrice" class="form-control" min="0" formControlName="price"></td>
             <td>
                 <span style="display: flex;justify-content: center; align-items: center;">
                     <div class="form-check form-switch">
@@ -76,7 +76,7 @@
                     </div>
                 </span>
             </td>
-            <td><button class="btn btn-primary" (click)="updateOrder()">Save</button>&nbsp;<button class="btn btn-secondary" (click)="clearUpdateForm()">Cancel</button></td>
+            <td><button class="btn btn-primary" id="updateOrderButton" (click)="updateOrder()">Save</button>&nbsp;<button class="btn btn-secondary" (click)="clearUpdateForm()">Cancel</button></td>
         </tr>
         <tr style="text-align: center;">
             <td colspan="4"><strong>Total Regular Bill :</strong> $ {{ totalRegularBill }}</td>
