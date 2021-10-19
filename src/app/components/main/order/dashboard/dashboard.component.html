@@ -13,20 +13,20 @@
             <tr>
                 
                 <td>
-                    <input class="form-control" type="text" name="" id="" formControlName="orderName">
+                    <input class="form-control" type="text" name="" id="addOrderName" formControlName="orderName">
                 </td>
                 <td>
-                    <input class="form-control" type="number" name="" id="" formControlName="price">
+                    <input class="form-control" type="number" name="" id="addOrderPrice" formControlName="price">
                 </td>
                 <td>
                     <span style="display: flex;justify-content: center; align-items: center;">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" name="isDiscounted" id="isDiscounted" formControlName="isDiscounted"><label class="form-check-label" for="isDiscounted">Add 5% Discount</label>
+                            <input class="form-check-input" type="checkbox" name="isDiscounted" id="addOrderisDiscounted" formControlName="isDiscounted"><label class="form-check-label" for="addOrderisDiscounted">Add 5% Discount</label>
                         </div>
                     </span>
                 </td>
                 <td>
-                    <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+                    <button class="btn btn-primary" id="addOrderButton" (click)="placeOrder()">Place Order</button>
                 </td>
                     
             </tr>
