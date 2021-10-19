@@ -42,8 +42,8 @@ export class OrderService {
     })
   }
 
-  public deleteOrder(id : number) {
-    this.backendService.deleteOrder(id).subscribe(data => {
+  public deleteOrder(order : Order) {
+    this.backendService.deleteOrder(order).subscribe(data => {
       this.deleteOrderDone.emit(true);
     }, (error: HttpErrorResponse) => {
       this.deleteOrderDone.emit(false);

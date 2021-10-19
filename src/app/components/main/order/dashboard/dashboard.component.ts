@@ -149,8 +149,8 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  public deleteOrder(id : number) {
-    this.orderService.deleteOrder(id);
+  public deleteOrder(order : Order) {
+    this.orderService.deleteOrder(order);
   }
 
 }

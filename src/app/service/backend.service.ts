@@ -54,9 +54,9 @@ export class BackendService {
     Delete Order
 
   */
-  public deleteOrder(id : number) : Observable<void> {
+  public deleteOrder(order : Order) : Observable<void> {
 
-    return this.httpClient.delete<void>(`${environment.api_orders_url}/${id}`);
+    return this.httpClient.post<void>(`${environment.api_orders_url}/delete`,order);
 
   }
 
