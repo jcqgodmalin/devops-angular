@@ -1,0 +1,9 @@
+.error-main {
+    padding: 10px 20px;
+}
+
+app-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

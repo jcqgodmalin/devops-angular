@@ -7,6 +7,19 @@ thead {
     font-weight: bold;
 }
 
+.form-control {
+    font-size: 12px;
+    padding: 6px;
+}
+
+.form-check-input {
+    font-size: 12px;
+}
+
+label.form-check-label {
+    font-size: 12px;
+}
+
 button.btn-primary {
     background-color: rgb(27, 27, 104);
     border-color: rgb(27, 27, 104);

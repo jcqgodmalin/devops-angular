@@ -1,6 +1,6 @@
 <!-- add order -->
 <form [formGroup]="addOrderForm">
-    <table class="table table-stripped">
+    <table class="table table-stripped" style="text-align: center;">
         <thead>
             <tr style="font-weight: bold;">
                 <td>Order Name</td>
@@ -13,13 +13,17 @@
             <tr>
                 
                 <td>
-                    <input type="text" name="" id="" formControlName="orderName">
+                    <input class="form-control" type="text" name="" id="" formControlName="orderName">
                 </td>
                 <td>
-                    <input type="number" name="" id="" formControlName="price">
+                    <input class="form-control" type="number" name="" id="" formControlName="price">
                 </td>
                 <td>
-                    <input type="checkbox" name="isDiscounted" id="isDiscounted" formControlName="isDiscounted"> Add 5% Discount
+                    <span style="display: flex;justify-content: center; align-items: center;">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" name="isDiscounted" id="isDiscounted" formControlName="isDiscounted"><label class="form-check-label" for="isDiscounted">Add 5% Discount</label>
+                        </div>
+                    </span>
                 </td>
                 <td>
                     <button class="btn btn-primary" (click)="placeOrder()">Place Order</button>
@@ -34,11 +38,11 @@
 <br>
 
 <!-- Orders table -->
-<form [formGroup]="updateOrderForm">
+<form [formGroup]="updateOrderForm" *ngIf="isServerHasProblem">
 <table class="table table-striped" style="text-align: center;">
     <thead>
         <tr style="text-align: center;">
-            <td colspan="4">Attending Clerk : Jane Doe</td>
+            <td colspan="4"><strong>Attending Clerk :</strong>  {{ clerkName }}</td>
         </tr>
         <tr style="font-weight: bold;">
             <td>Order Name</td>
@@ -50,22 +54,35 @@
     <tbody>
         <tr *ngFor="let order of orders">
             <td class="order-name">{{ order?.orderName }}</td>
-            <td>₱ {{ order?.price }}</td>
-            <td><input type="checkbox" [checked]="order.discounted" disabled></td>
+            <td>$ {{ order?.price }}</td>
             <td>
-                <button class="btn btn-primary" (click)="onClickUpdate(order)"><i class="fas fa-edit"></i> Edit</button> &nbsp; <button class="btn btn-danger" (click)="deleteOrder(order.id)"><i class="fas fa-trash-alt"></i> Delete</button></td>
+                <span style="display: flex;justify-content: center;">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" [checked]="order.discounted" disabled>
+                    </div>
+                </span>
+            </td>
+            <td>
+                <button class="btn btn-primary" (click)="onClickUpdate(order)"><i class="fas fa-edit"></i> Edit</button> &nbsp; <button class="btn btn-danger" (click)="deleteOrder(order.id)"><i class="fas fa-trash-alt"></i> Delete</button>
+            </td>
         </tr>
         <tr *ngIf="forUpdate">
-            <td><input type="text" formControlName="orderName"></td>
-            <td><input type="number" formControlName="price"></td>
-            <td><input type="checkbox" formControlName="isDiscounted"></td>
+            <td><input type="text" class="form-control" formControlName="orderName"></td>
+            <td><input type="number" class="form-control" min="0" formControlName="price"></td>
+            <td>
+                <span style="display: flex;justify-content: center; align-items: center;">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="updateIsDiscounted" id="updateIsDiscounted" formControlName="isDiscounted"><label class="form-check-label" for="updateIsDiscounted">Add 5% Discount</label>
+                    </div>
+                </span>
+            </td>
             <td><button class="btn btn-primary" (click)="updateOrder()">Save</button>&nbsp;<button class="btn btn-secondary" (click)="clearUpdateForm()">Cancel</button></td>
         </tr>
         <tr style="text-align: center;">
-            <td colspan="4">Total Regular Bill : ₱ {{ totalRegularBill }}</td>
+            <td colspan="4"><strong>Total Regular Bill :</strong> $ {{ totalRegularBill }}</td>
         </tr>
         <tr style="text-align: center;">
-            <td colspan="4">Total Discounted Bill : ₱ {{ totalDiscountedBill }}</td>
+            <td colspan="4"><strong>Total Discounted Bill :</strong> $ {{ totalDiscountedBill }}</td>
         </tr>
     </tbody>
 </table>

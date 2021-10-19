@@ -1,6 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CafeClerk } from 'src/app/model/cafeclerk';
 import { Order } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
 
@@ -11,11 +11,12 @@ import { OrderService } from 'src/app/service/order.service';
 })
 export class DashboardComponent implements OnInit {
 
+  clerkName! : String;
+
   addOrderForm! : FormGroup;
   updateOrderForm! : FormGroup;
 
   orders!: Order[];
-  clerk! : CafeClerk;
 
   totalRegularBill : number = 0.0;
   totalDiscountedBill : number = 0.0;
@@ -25,10 +26,13 @@ export class DashboardComponent implements OnInit {
   addOrderError : boolean = false;
   updateOrderError : boolean = false;
 
+  isServerHasProblem : boolean = false;
+
   constructor(private orderService : OrderService, private fb : FormBuilder) { }
 
 
   ngOnInit(): void {
+
     this.getOrders();
 
     this.addOrderForm = this.fb.group({
@@ -66,6 +70,24 @@ export class DashboardComponent implements OnInit {
         this.clearUpdateForm();
       }
     })
+
+    this.orderService.totalRegularBill.subscribe(data => {
+      if(data !== false){
+        this.totalRegularBill = data;
+      }
+    })
+
+    this.orderService.totalDiscountedBill.subscribe(data => {
+      if(data !== false){
+        this.totalDiscountedBill = data;
+      }
+    })
+
+    this.orderService.clerkName.subscribe(data => {
+      if(data !== false) {
+        this.clerkName = data;
+      }
+    })
   }
 
 
@@ -88,7 +110,17 @@ export class DashboardComponent implements OnInit {
   public getOrders() {
     this.orderService.getAllOrders().subscribe(data => {
       this.orders = data;
-    })
+      this.isServerHasProblem = true;
+      this.orderService.getRegularBill();
+      this.orderService.getDiscountedBill();
+      this.orderService.getClerkName();
+    },
+    (error: HttpErrorResponse) => {
+      this.orderService.getOrderDone.emit(false);
+      this.isServerHasProblem = true;
+    }
+    )
+    
   }
 
   public placeOrder(){
